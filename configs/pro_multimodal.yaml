@@ -1,0 +1,72 @@
+paths:
+  train_query_manifest: TRAIN_QUERY_MANIFEST_PATH
+  train_item_manifest: TRAIN_ITEM_MANIFEST_PATH
+  train_query_embeddings: TRAIN_QUERY_EMBEDDING_PATH
+  train_item_embeddings: TRAIN_ITEM_EMBEDDING_PATH
+  train_item_modalities: TRAIN_ITEM_MODALITY_PATH
+  train_pairs: TRAIN_PAIRS_PATH
+  validation_query_manifest: VALIDATION_QUERY_MANIFEST_PATH
+  validation_item_manifest: VALIDATION_ITEM_MANIFEST_PATH
+  validation_query_embeddings: VALIDATION_QUERY_EMBEDDING_PATH
+  validation_item_embeddings: VALIDATION_ITEM_EMBEDDING_PATH
+  validation_item_modalities: VALIDATION_ITEM_MODALITY_PATH
+  validation_pairs: VALIDATION_PAIRS_PATH
+  test_query_manifest: TEST_QUERY_MANIFEST_PATH
+  test_item_manifest: TEST_ITEM_MANIFEST_PATH
+  test_query_embeddings: TEST_QUERY_EMBEDDING_PATH
+  test_item_embeddings: TEST_ITEM_EMBEDDING_PATH
+  test_item_modalities: TEST_ITEM_MODALITY_PATH
+  test_qrels: TEST_QRELS_PATH
+  quantizer_checkpoint: QUANTIZER_CHECKPOINT_PATH
+  retriever_checkpoint: RETRIEVER_CHECKPOINT_PATH
+  output_json: OUTPUT_JSON_PATH
+extract:
+  reference_code_root: REFERENCE_CODE_ROOT
+  genir_root: GENIR_ROOT
+  mbeir_data_root: MBEIR_DATA_ROOT
+  model_name: ViT-L/14
+  checkpoint_path: ENCODER_CHECKPOINT_PATH
+  clip_model_root: CLIP_MODEL_ROOT
+  query_instruct_path: instructions/query_instructions.tsv
+  enable_query_instruct: true
+  batch_size: 128
+  num_workers: 8
+  image_size: 224,224
+  device: cuda:0
+quantizer:
+  embedding_dim: 768
+  levels: 16
+  codebook_sizes: [512, 512, 512, 512, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 2048, 2048, 2048, 2048]
+  modality_tokens: 3
+  combiner_projection_dim: 2560
+  combiner_hidden_dim: 5120
+  kmeans_init: true
+  kmeans_iters: 1000
+  codebook_decay: 0.9
+  ema_update: true
+  threshold_ema_dead_code: 2
+  learning_rate: 0.0001
+  epochs: 20
+  batch_size: 512
+  gradient_accumulation_steps: 1
+  rq_loss_weight: 100.0
+  mse_loss_weight: 100.0
+  prefix_ranking_weight: 100.0
+  prefix_ranking_warmup_fraction: 0.1
+  prefix_ranking_temperature: 0.05
+  prefix_ranking_topk: 128
+  prefix_ranking_levels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+retriever:
+  model_name: t5-small
+  embedding_dim: 768
+  learning_rate: 0.0001
+  epochs: 30
+  batch_size: 512
+  beam_size: 50
+  output_size: 100
+  score_fusion_enabled: true
+  score_fusion_weight: 10.0
+  score_fusion_normalize_bias: true
+diagnostics:
+  beam_size: 20
+seed: 2023

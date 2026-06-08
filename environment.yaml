@@ -1,0 +1,32 @@
+name: pro
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.1
+  - numpy
+  - scipy
+  - scikit-learn
+  - pandas
+  - tqdm
+  - pillow
+  - pyyaml
+  - requests
+  - pip:
+      - transformers
+      - omegaconf
+      - accelerate
+      - einops
+      - marisa-trie
+      - vector-quantize-pytorch
+      - python-dotenv
+      - typeguard
+      - wandb
+      - openai-clip
+      - tokenizers

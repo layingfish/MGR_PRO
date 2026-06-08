@@ -1,0 +1,38 @@
+paths:
+  item_embeddings: TIGER_ITEM_EMBEDDING_PATH
+  train_sequences: TIGER_TRAIN_SEQUENCE_PATH
+  validation_sequences: TIGER_VALIDATION_SEQUENCE_PATH
+  test_sequences: TIGER_TEST_SEQUENCE_PATH
+  quantizer_checkpoint: TIGER_QUANTIZER_CHECKPOINT_PATH
+  recommender_checkpoint: TIGER_RECOMMENDER_CHECKPOINT_PATH
+  output_json: TIGER_OUTPUT_JSON_PATH
+tiger:
+  item_embedding_dim: 2048
+  sequence_length: 120
+  levels: 3
+  codebook_sizes: [160, 240, 256]
+  kmeans_init: true
+  kmeans_iters: 1000
+  codebook_decay: 0.9
+  ema_update: true
+  threshold_ema_dead_code: 2
+  decoder_tokens: 4
+  transformer_vocab_size: 256
+  hidden_size: 128
+  num_heads: 6
+  num_layers: 4
+  dropout: 0.15
+  learning_rate: 0.0001
+  batch_size: 32
+  max_steps: 15000
+  beam_size: 50
+  score_fusion_enabled: true
+  score_fusion_weight: 0.3
+  score_fusion_levels: 3
+  score_fusion_query_source: encoder_bridge
+  score_fusion_normalize_bias: true
+  score_fusion_encoder_pooling: last_mean
+  score_fusion_last_weight: 0.7
+  score_fusion_bridge_batch_size: 1024
+  score_fusion_bridge_ridge_lambda: 0.001
+seed: 42
